@@ -27,7 +27,7 @@ export const TaskManager = () => {
           onChange={(e) => setTask(e.target.value)}
           placeholder="Add a task..."
         />
-        <button type="button" onClick={addTask} disabled={!task.trim()}>
+        <button type="button" className={styles.addButton} onClick={addTask} disabled={!task.trim()}>
           Add
         </button>
       </div>
@@ -36,7 +36,7 @@ export const TaskManager = () => {
         {tasks.map((t) => (
           <li key={t.id} className={styles.taskItem}>
             <span>{t.text}</span>
-            <button type="button" onClick={() => dispatch({ type: 'remove', payload: t.id })}>
+            <button type="button" className={styles.removeButton} onClick={() => dispatch({ type: 'remove', payload: t.id })}>
               ✕
             </button>
           </li>

@@ -1,9 +1,10 @@
 .container {
-  padding: 20px;
+  padding: 24px;
   border-radius: 8px;
   max-width: 400px;
   margin: 20px auto;
   text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -20,14 +21,52 @@
 .inputRow {
   display: flex;
   gap: 8px;
-  margin: 12px 0;
+  margin: 16px 0;
 }
 
 .input {
   flex: 1;
-  padding: 8px;
+  padding: 8px 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #1e90ff;
+}
+
+.addButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.addButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.light .addButton {
+  background-color: #1e90ff;
+}
+.light .addButton:hover:not(:disabled) {
+  background-color: #1876cc;
+}
+
+.dark .addButton {
+  background-color: #85d1b0;
+  color: #242629;
+}
+.dark .addButton:hover:not(:disabled) {
+  background-color: #6bbd99;
 }
 
 .taskList {
@@ -41,6 +80,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+}
+
+.removeButton {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.6;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.removeButton:hover {
+  opacity: 1;
+  color: #e74c3c;
 }
