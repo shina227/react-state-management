@@ -1,13 +1,10 @@
 import { useReducer, useState } from 'react';
 import { taskReducer } from '../reducers/taskReducer';
-import { useTheme } from '../context/ThemeContext';
-import { LIGHT_THEME } from '../constants/theme';
 import styles from './TaskManager.module.css';
 
 export const TaskManager = () => {
   const [tasks, dispatch] = useReducer(taskReducer, []);
   const [task, setTask] = useState('');
-  const { theme } = useTheme();
 
   const addTask = () => {
     const trimmed = task.trim();
@@ -17,14 +14,15 @@ export const TaskManager = () => {
   };
 
   return (
-    <div className={`${styles.container} ${theme === LIGHT_THEME ? styles.light : styles.dark}`}>
-      <h2>Task Manager</h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Task Manager</h2>
 
       <div className={styles.inputRow}>
         <input
           className={styles.input}
           value={task}
           onChange={(e) => setTask(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && addTask()}
           placeholder="Add a task..."
         />
         <button type="button" className={styles.addButton} onClick={addTask} disabled={!task.trim()}>
@@ -32,16 +30,25 @@ export const TaskManager = () => {
         </button>
       </div>
 
-      <ul className={styles.taskList}>
-        {tasks.map((t) => (
-          <li key={t.id} className={styles.taskItem}>
-            <span>{t.text}</span>
-            <button type="button" className={styles.removeButton} onClick={() => dispatch({ type: 'remove', payload: t.id })}>
-              ✕
-            </button>
-          </li>
-        ))}
-      </ul>
+      {tasks.length === 0 ? (
+        <p className={styles.empty}>No tasks yet - add your first one above.</p>
+      ) : (
+        <ul className={styles.taskList}>
+          {tasks.map((t) => (
+            <li key={t.id} className={styles.taskItem}>
+              <span>{t.text}</span>
+              <button
+                type="button"
+                className={styles.removeButton}
+                onClick={() => dispatch({ type: 'remove', payload: t.id })}
+                aria-label={`Remove ${t.text}`}
+              >
+                ✕
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

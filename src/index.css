@@ -1,0 +1,48 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent, #1e90ff);
+  outline-offset: 2px;
+}
+
+/* Theme tokens */
+[data-theme='light'] {
+  --bg: #ffffff;
+  --surface: #f7f8fa;
+  --text: #000000;
+  --text-muted: rgba(0, 0, 0, 0.55);
+  --accent: #1e90ff;
+  --accent-contrast: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme='dark'] {
+  --bg: #242629;
+  --surface: #2c2f33;
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --accent: #85d1b0;
+  --accent-contrast: #16221b;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
